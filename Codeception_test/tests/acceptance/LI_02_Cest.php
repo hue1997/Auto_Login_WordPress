@@ -2,15 +2,19 @@
 use Step\Acceptance\Admin as LoginStep;
 class LI_02_Cest
 {
-    public function _before(AcceptanceTester $I)
-    {
-    }
+    /**
+     * @param LoginStep $I
+     * @param $scenario
+     * @throws Exception
+     * Check [Email Address or Username] and [Password] valid
+     */
 
     // tests
-    public function tryToTest(Step\Acceptance\Admin $I, $scenario)
+    public function LI_02(LoginStep $I, $scenario)
     {
         $I = new LoginStep($scenario);
-        $I->loginAsAdmin('nhoa16967@gmail.com','123');
-        $I->see('Password invalid');
+        $I->loginAsAdmin('dohue97','hueham123');
+        $I->waitForText('Reader', 5);
+        $I->comment("Login Succes!");
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use Page\Login as LoginPage;
+use Step\Acceptance\Admin as LoginStep;
 class LI_03_Cest
 {
     public function _before(AcceptanceTester $I)
@@ -7,10 +7,11 @@ class LI_03_Cest
     }
 
     // tests
-    public function tryToTest(AcceptanceTester $I)
+    public function LI_03(LoginStep $I, $scenario)
     {
-        $I->amOnPage('/log-in?redirect_to=https%3A%2F%2Fwordpress.com%2F');
-        $I->click(LoginPage::$ContinueButton);
-        $I->wait(5);
+        $I = new LoginStep($scenario);
+        $I->loginAsAdmin('nhoa16967@gmail.com', '123');
+        $I->waitForText('Oops, that\'s not the right password. Please try again!', 5);
+        $I->comment("login failure!");
     }
 }

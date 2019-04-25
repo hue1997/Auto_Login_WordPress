@@ -1,16 +1,20 @@
 <?php
-use Page\Login as LoginPage;
+use Step\Acceptance\Admin as LoginStep;
 class LI_18_Cest
 {
-    public function _before(AcceptanceTester $I)
-    {
-    }
+    /**
+     * @param LoginStep $I
+     * @param $scenario
+     * @throws Exception
+     * [Password] enter the end SPACE value.
+     */
 
     // tests
-    public function tryToTest(AcceptanceTester $I)
+    public function LI_18(LoginStep $I, $scenario)
     {
-        $I->amOnPage('/log-in?redirect_to=https%3A%2F%2Fwordpress.com%2F');
-        $I->click(LoginPage::$SignUp);
-        $I->wait(5);
+        $I = new LoginStep($scenario);
+        $I->loginAsAdmin('nhoa16967@gmail.com','hueham123  ');
+        $I->waitForText('Reader', 7);
+        $I->comment("Login Succes!");
     }
 }

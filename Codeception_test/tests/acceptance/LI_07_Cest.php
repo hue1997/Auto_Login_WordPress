@@ -1,5 +1,5 @@
 <?php
-use Step\Acceptance\Admin3 as LoginStep3;
+use Step\Acceptance\Admin as LoginStep;
 class LI_07_Cest
 {
     public function _before(AcceptanceTester $I)
@@ -7,10 +7,11 @@ class LI_07_Cest
     }
 
     // tests
-    public function tryToTest(Step\Acceptance\Admin3 $I, $scenario)
+    public function LI_07(LoginStep $I, $scenario)
     {
-        $I = new LoginStep3($scenario);
-        $I->loginAsAdmin3('nhoa16967@gmail.com','hueham123');
-        $I->see('show pass');
+        $I = new LoginStep($scenario);
+        $I->checkEmail('');
+        $I->waitForText('Please enter a username or email address.', 5);
+        $I->comment("Login Failure!");
     }
 }

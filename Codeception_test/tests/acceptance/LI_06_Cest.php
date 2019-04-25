@@ -1,16 +1,20 @@
 <?php
-use Step\Acceptance\Admin1 as LoginStep1;
+use Step\Acceptance\Admin as LoginStep;
 class LI_06_Cest
 {
-    public function _before(AcceptanceTester $I)
-    {
-    }
+    /**
+     * @param LoginStep $I
+     * @param $scenario
+     * @throws Exception
+     * check [Email Address or Username] is Space value
+     */
 
     // tests
-    public function tryToTest(Step\Acceptance\Admin1 $I, $scenario)
+    public function LI_06(LoginStep $I, $scenario)
     {
-        $I = new LoginStep1($scenario);
-        $I->loginAsAdmin1('','//*[@id="primary"]/div/main/div/div[1]/div/form/div[1]/div[2]/button');
-        $I->see('Email invalid');
+        $I = new LoginStep($scenario);
+        $I->loginAsAdmin('   ', 'hueham123');
+        $I->waitForText('<strong>ERROR</strong>: The username field is empty.', 5);
+        $I->comment("Login Succes!");
     }
 }

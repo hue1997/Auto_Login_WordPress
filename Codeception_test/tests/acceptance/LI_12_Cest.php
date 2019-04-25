@@ -1,16 +1,20 @@
 <?php
-use Page\Login as LoginPage;
+use Step\Acceptance\Admin as LoginStep;
 class LI_12_Cest
 {
-    public function _before(AcceptanceTester $I)
-    {
-    }
+    /**
+     * @param LoginStep $I
+     * @param $scenario
+     * @throws Exception
+     * [Email Address or Username] enter the middle SPACE value
+     */
 
     // tests
-    public function tryToTest(AcceptanceTester $I)
+    public function LI_12(LoginStep $I, $scenario)
     {
-        $I->amOnPage('/log-in?redirect_to=https%3A%2F%2Fwordpress.com%2F');
-        $I->click(LoginPage::$Create);
-        $I->wait(5);
+        $I = new LoginStep($scenario);
+        $I->checkEmail('nhoa16967  @gmail.com');
+        $I->waitForText('User does not exist.', 5);
+        $I->comment("Login Failure!");
     }
 }
